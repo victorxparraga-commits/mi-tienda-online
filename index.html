@@ -1,32 +1,194 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Tienda SV</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; text-align: center; }
-        header { background-color: #111; color: #fff; padding: 20px; font-size: 24px; font-weight: bold; }
-        .container { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
-        .card { background: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 15px; width: 280px; padding: 15px; text-align: center; }
-        .card img { width: 100%; border-radius: 8px; height: 200px; object-fit: cover; }
-        .price { font-size: 20px; color: #27ae60; font-weight: bold; margin: 10px 0; }
-        .btn-ws { display: inline-block; background-color: #25d366; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vics Store - Catálogo Oficial</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+    }
+
+    header {
+      max-width: 1100px;
+      margin: 0 auto 30px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    h1 { 
+      margin: 0; 
+      font-size: 1.8rem; 
+      color: var(--primary); 
+    }
+
+    .grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background-color: #f1f5f9;
+    }
+
+    .card-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .badge {
+      align-self: flex-start;
+      background: #e0e7ff;
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+    }
+
+    .description {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .price {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .btn {
+      background-color: #25d366; /* Color verde oficial de WhatsApp */
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover { 
+      background-color: #22bf5b; 
+    }
+  </style>
 </head>
 <body>
 
-    <header>Mi Tienda SV</header>
+  <header>
+    <h1>Vics Store</h1>
+    <span>Catálogo en Línea</span>
+  </header>
 
-    <div class="container">
+  <div class="grid" id="product-grid"></div>
+
+  <script>
+    // Configuración de los 2 productos negociados y tu número de WhatsApp (+503 7508 9722)
+    const telefonoWhatsApp = "50375089722";
+
+    const productos = [
+      {
+        id: 1,
+        categoria: "Audio",
+        titulo: "Audífonos Inalámbricos Yesido TWS38",
+        precio: 15.00,
+        imagen: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80",
+        descripcion: "Bluetooth 5.4, sonido de alta definición, cancelación pasiva de ruido y hasta 5 horas de autonomía continua."
+      },
+      {
+        id: 2,
+        categoria: "Cargadores",
+        titulo: "Cargador Inalámbrico 3 en 1 Fast Charge",
+        precio: 20.00,
+        imagen: "https://images.unsplash.com/photo-1622445268121-8a1d70860011?auto=format&fit=crop&w=600&q=80",
+        descripcion: "Estación de carga rápida plegable para iPhone/Samsung, Smartwatch y AirPods simultáneamente sin cables molestos."
+      }
+    ];
+
+    function renderizarProductos() {
+      const container = document.getElementById('product-grid');
+      container.innerHTML = productos.map(p => `
         <div class="card">
-            <img src="https://via.placeholder.com/250" alt="Producto">
-            <h3>Nombre del Producto</h3>
-            <p>Descripción corta del producto y sus beneficios.</p>
-            <div class="price">$25.00</div>
-            <a href="https://wa.me/50375089722?text=Hola,%20quiero%20comprar%20este%20producto" class="btn-ws" target="_blank">Pedir por WhatsApp</a>
+          <img src="${p.imagen}" alt="${p.titulo}">
+          <div class="card-content">
+            <span class="badge">${p.categoria}</span>
+            <h2 class="title">${p.titulo}</h2>
+            <p class="description">${p.descripcion}</p>
+            <div class="price-row">
+              <span class="price">$${p.precio.toFixed(2)}</span>
+              <button class="btn" onclick="comprar('${p.titulo}')">Pedir por WhatsApp</button>
+            </div>
+          </div>
         </div>
-    </div>
+      `).join('');
+    }
 
+    function comprar(producto) {
+      const mensaje = encodeURIComponent(`¡Hola! Me interesa comprar el siguiente producto: ${producto}`);
+      window.open(`https://wa.me/${telefonoWhatsApp}?text=${mensaje}`, '_blank');
+    }
+
+    renderizarProductos();
+  </script>
 </body>
 </html>
