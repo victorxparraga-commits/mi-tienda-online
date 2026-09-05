@@ -151,7 +151,7 @@
         categoria: "Audio",
         titulo: "Audífonos Inalámbricos Yesido TWS38",
         precio: 18.99,
-        imagen: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80",
+        imagen: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80",
         descripcion: "Bluetooth 5.4, sonido de alta definición, cancelación pasiva de ruido y hasta 5 horas de autonomía continua."
       },
       {
@@ -159,7 +159,7 @@
         categoria: "Cargadores",
         titulo: "Cargador Inalámbrico 3 en 1 Fast Charge",
         precio: 20.00,
-        imagen: "https://images.unsplash.com/photo-1622445268121-8a1d70860011?auto=format&fit=crop&w=600&q=80",
+        imagen: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
         descripcion: "Estación de carga rápida plegable para iPhone/Samsung, Smartwatch y AirPods simultáneamente sin cables molestos."
       }
     ];
@@ -168,7 +168,7 @@
       const container = document.getElementById('product-grid');
       container.innerHTML = productos.map(p => `
         <div class="card">
-          <img src="${p.imagen}" alt="${p.titulo}">
+          <img src="${p.imagen}" alt="${p.titulo}" onerror="this.src='https://images.unsplash.com/photo-1616440347437-b1c73416efc2?w=600&auto=format&fit=crop&q=80'">
           <div class="card-content">
             <span class="badge">${p.categoria}</span>
             <h2 class="title">${p.titulo}</h2>
